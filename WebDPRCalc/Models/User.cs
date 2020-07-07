@@ -1,24 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace WebDPRCalc.Models
 {
     public class User
     {
-        private string username;
+        public string username;
         private byte[] password;
-        private Attack[] Attacks;
+        public List<Attack> attacks;
 
 
 
         public bool validPassword(string password)
         {
             byte[] hashedPassword = hashPassword(password);
-            if(hashedPassword == this.password)
+            if (hashedPassword == this.password)
             {
                 return true;
             }
