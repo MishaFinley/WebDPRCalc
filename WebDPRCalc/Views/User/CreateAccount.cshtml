@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "CreateAccount";
+}
+
+<h1>CreateAccount</h1>
+<form method="post" class="act-form">
+    <div class="inpStorage">
+        <!--//asp-for="Username"-->
+        <label class="inpLabel">Username:</label>
+        <input type="text" name="username" class="inp" />
+
+        <!--//asp-validation-for="Username"-->
+        <span></span>
+    </div>
+
+    <div class="inpStorage">
+        <!--//asp-for="Password"-->
+        <label class="inpLabel">Password:</label>
+        <input type="password" name="password" class="inp" />
+
+        <!--//asp-validation-for="Password"-->
+        <span></span>
+    </div>
+
+    <div class="inpStorage">
+        <label class="inpLabel">Confirm Password:</label>
+        <input type="password" name="passwordcon" class="inp" />
+        <span></span>
+    </div>
+
+    <input class="button" type="submit" value="Create" />
+</form>
