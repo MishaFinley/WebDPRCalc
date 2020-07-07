@@ -1,7 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using Nancy.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebDPRCalc.Models;
 
 namespace WebDPRCalc
@@ -12,26 +14,31 @@ namespace WebDPRCalc
         private static MongoClient dbClient = new MongoClient(dbConnectionString);
         private static IMongoDatabase database = dbClient.GetDatabase("DPR");
         private IMongoCollection<BsonDocument> users = database.GetCollection<BsonDocument>("users");
-
-        public void createUser(User user)
+        private BsonDocument ToBson(object o)
         {
-
+            return BsonDocument.Parse(new JavaScriptSerializer().Serialize(o));
         }
-        public User readUser(string username)
+        public async void createUser(User user)
+        {
+            await users.InsertOneAsync(ToBson(user));
+        }
+        public async Task<User> readUser(string username)
         {
             return null;
         }
         public void updateUser(User user)
         {
-
+            deleteUser(user.username);
+            createUser(user);
         }
-        public void deleteUser(string username)
+        public async void deleteUser(string username)
         {
-
+            var filter = Builders<BsonDocument>.Filter.Eq("username", username);
+            await users.DeleteManyAsync(filter);
         }
-        public void createAttack(string username, Attack attack)
+        public async void createAttack(string username, Attack attack)
         {
-            var user = readUser(username);
+            var user = await readUser(username);
             if (!(user is null))
             {
                 if (user.attacks.Count > 0)
@@ -43,9 +50,9 @@ namespace WebDPRCalc
             }
             throw new ArgumentException("User does not exist");
         }
-        public Attack readAttack(string username, int attackID)
+        public async Task<Attack> readAttack(string username, int attackID)
         {
-            var attacks = readAttacks(username);
+            var attacks = await readAttacks(username);
             if (!(attacks is null))
             {
                 foreach (var attack in attacks)
@@ -58,18 +65,18 @@ namespace WebDPRCalc
             }
             return null;
         }
-        public List<Attack> readAttacks(string username)
+        public async Task<List<Attack>> readAttacks(string username)
         {
-            var user = readUser(username);
+            var user = await readUser(username);
             if (!(user is null))
             {
                 return user.attacks;
             }
             throw new ArgumentException("User does not exist");
         }
-        public void updateAttack(string username, Attack attack)
+        public async void updateAttack(string username, Attack attack)
         {
-            var user = readUser(username);
+            var user = await readUser(username);
             if (!(user is null))
             {
                 var attacks = user.attacks;
@@ -88,9 +95,9 @@ namespace WebDPRCalc
             }
             throw new ArgumentException("User does not exist");
         }
-        public void deleteAttack(string username, int attackId)
+        public async void deleteAttack(string username, int attackId)
         {
-            var user = readUser(username);
+            var user = await readUser(username);
             if (!(user is null))
             {
                 var attacks = user.attacks;
