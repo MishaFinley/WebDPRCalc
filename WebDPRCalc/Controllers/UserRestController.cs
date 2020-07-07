@@ -10,6 +10,7 @@ namespace WebDPRCalc.Controllers
     [ApiController]
     public class UserRestController : ControllerBase
     {
+        //Authentication / Authorization
         private UserDatabaseInterface dbInterface = new UserDatabaseInterface();
         [HttpPost]
         public void CreateUser([FromBody] object user)
