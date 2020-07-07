@@ -2,7 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">DPRCFDND</h1>
+        <a asp-controller="User" asp-action="Login">Login</a>
+        <br />
+        <a asp-controller="User" asp-action="CreateAccount">Create Account</a>
+        <br />
+        <a asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
+        <br />
+
+        <p>Only Avalible After Logged On</p>
+
+        <a asp-controller="Calculator" asp-action="AttackList">View Attacks</a>
+        <br />
+        <a asp-controller="User" asp-action="Profile">View Profile</a>
+        <br />
+    </div>
