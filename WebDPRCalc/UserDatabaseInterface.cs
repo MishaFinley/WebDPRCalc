@@ -24,7 +24,13 @@ namespace WebDPRCalc
         }
         public async Task<User> readUser(string username)
         {
-            return null;
+            var filter = Builders<BsonDocument>.Filter.Eq("username", username);
+            var document = await users.Find(filter).FirstOrDefaultAsync();
+            if (document is null)
+                return null;
+            document.Remove("_id");
+            var json = document.ToJson();
+            return new JavaScriptSerializer().Deserialize<User>(json);
         }
         public void updateUser(User user)
         {

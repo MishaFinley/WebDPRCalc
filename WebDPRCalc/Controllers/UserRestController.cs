@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nancy.Json;
 using System;
+using System.Threading.Tasks;
 using WebDPRCalc.Models;
 
 namespace WebDPRCalc.Controllers
@@ -13,22 +14,40 @@ namespace WebDPRCalc.Controllers
         [HttpPost]
         public void CreateUser([FromBody] object user)
         {
-
+            User parsed;
+            try
+            {
+                parsed = (User)user;
+                dbInterface.createUser(parsed);
+            }
+            catch (InvalidCastException)
+            {
+                Response.StatusCode = 400;
+            }
         }
         [HttpGet("{username}")]
-        public string ReadUser(string username)
+        public async Task<string> ReadUser(string username)
         {
-            return new JavaScriptSerializer().Serialize(null);
+            return new JavaScriptSerializer().Serialize(await dbInterface.readUser(username));
         }
         [HttpPatch]
         public void UpdateUser([FromBody] object user)
         {
-
+            User parsed;
+            try
+            {
+                parsed = (User)user;
+                dbInterface.updateUser(parsed);
+            }
+            catch (InvalidCastException)
+            {
+                Response.StatusCode = 400;
+            }
         }
         [HttpDelete("{username}")]
         public void DeleteUser(string username)
         {
-
+            dbInterface.deleteUser(username);
         }
         [HttpPost("attack/{username}")]
         public void CreateAttack(string username, [FromBody] object attack)
@@ -52,7 +71,7 @@ namespace WebDPRCalc.Controllers
             }
         }
         [HttpGet("attack/{username}/{id}")]
-        public string ReadAttack(string username, int id)
+        public async Task<string> ReadAttack(string username, int id)
         {
             try
             {
@@ -111,11 +130,11 @@ namespace WebDPRCalc.Controllers
             }
         }
         [HttpGet("attack/{username}/{id}/caclulation")]
-        public string getDPRCalculationForAttack(string username, int id)
+        public async Task<string> getDPRCalculationForAttack(string username, int id)
         {
             try
             {
-                var attack = dbInterface.readAttack(username, id);
+                var attack = await dbInterface.readAttack(username, id);
                 return new JavaScriptSerializer().Serialize(attack.DPRCaclulation());
             }
             catch (ArgumentException ex)
