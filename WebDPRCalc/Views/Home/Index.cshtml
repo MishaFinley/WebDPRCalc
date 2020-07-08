@@ -1,20 +1,27 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http;
+@{
     ViewData["Title"] = "Home Page";
 }
 
     <div class="text-center">
         <h1 class="display-4">DPRCFDND</h1>
-        <a asp-controller="User" asp-action="Login">Login</a>
-        <br />
-        <a asp-controller="User" asp-action="CreateAccount">Create Account</a>
-        <br />
-        <a asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
-        <br />
+        @if (Context.Session.GetString("username") == null)
+        {
+            <a asp-controller="User" asp-action="Login">Login</a>
+            <br />
+            <a asp-controller="User" asp-action="CreateAccount">Create Account</a>
+            <br />
+            <a asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
+            <br />
+        }
+        else
+        {
 
-        <p>Only Avalible After Logged On</p>
-
-        <a asp-controller="Calculator" asp-action="AttackList">View Attacks</a>
-        <br />
-        <a asp-controller="User" asp-action="Profile">View Profile</a>
-        <br />
+            <a asp-controller="Calculator" asp-action="AttackList">View Attacks</a>
+            <br />
+            <a asp-controller="User" asp-action="Profile">View Profile</a>
+            <br />
+            <a asp-controller="User" asp-action="Logout">Logout</a>
+            <br />
+        }
     </div>
