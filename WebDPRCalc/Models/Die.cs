@@ -106,5 +106,5 @@ namespace WebDPRCalc.Models
             return new Die { sidesCount = sides, rerollAtBelow = reroll, mimumumNumber = min };
         }
     }
-    //2d6(r2)+1d8(m1)
+    //2d6(r2)+1d8(m2)+4d4+1d12(r2,m2)
 }
