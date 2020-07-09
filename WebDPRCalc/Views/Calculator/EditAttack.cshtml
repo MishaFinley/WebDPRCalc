@@ -3,6 +3,78 @@
     ViewData["Title"] = "EditAttack";
 }
 
-<h1>EditAttack</h1>
+<h1>DRPCFDND</h1>
 <a asp-controller="Calculator" asp-action="Tutorial">Calculator Tutorial</a>
 
+<form method="post" class="act-form">
+    <div class="tohit">
+        <div class="inpStorage">
+
+            <label class="inpLabel">Attack Name:</label>
+            <input type="text" name="atkname" class="inp" />
+            <span></span>
+        </div>
+
+        <div class="inpStorage">
+
+            <label class="inpLabel">Attack Modifier:</label>
+            <input type="text" name="atkmod" class="inp" />
+            <span></span>
+
+            <label class="inpLabel">Critical Range:</label>
+            <input type="text" name="critrange" class="inp" />
+            <span></span>
+        </div>
+
+        <div class="inpStorage">
+            <label class="inpLabel">Lucky Die?</label>
+            <input type="checkbox" name="lucky" class="inp" />
+            <span></span>
+
+            <label class="inpLabel">Elven Accuracy?</label>
+            <input type="checkbox" name="elvenacc" class="inp" />
+            <span></span>
+        </div>
+
+        <div class="inpStorage">
+            <label class="inpLabel">Halfling Luck?</label>
+            <input type="checkbox" name="halflucky" class="inp" />
+            <span></span>
+
+            <label class="inpLabel">Re-roll on miss?</label>
+            <input type="checkbox" name="missreroll" class="inp" />
+            <span></span>
+        </div>
+
+        <div class="inpStorage">
+
+            <label class="inpLabel">To Hit Dice</label>
+            <input type="text" name="tohit" class="inp" />
+
+            <span></span>
+        </div>
+    </div>
+
+    <div class="todamage">
+        <div class="inpStorage">
+
+            <label class="inpLabel">Damage Modifier</label>
+            <input type="text" name="dmgmod" class="inp" />
+            <span></span>
+
+            <label class="inpLabel">Resisted?</label>
+            <input type="checkbox" name="resist" class="inp" />
+            <span></span>
+        </div>
+
+        <div class="inpStorage">
+            <label class="inpLabel">Damage Dice</label>
+            <input type="text" name="dmgdice" class="inp" />
+            <span></span>
+        </div>
+
+    </div>
+
+
+    <input class="button" type="submit" value="Submit" />
+</form>
