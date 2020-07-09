@@ -1,4 +1,6 @@
-﻿namespace WebDPRCalc.Models
+﻿using System.Collections.Generic;
+
+namespace WebDPRCalc.Models
 {
     public class DamageRoll
     {
@@ -35,15 +37,33 @@
         }
         private double averageAfterRerollCountOfDie(double damage, Die[] dice)
         {
-            //TODO
-            return damage;
+            List<double> Increases = new List<double>();
+            for (int i = 0; i < dice.Length; i++)
+            {
+                double dieIncrease = 0;
+                for (int side = 1; side <= dice[i].sidesCount / 2; side++)
+                {
+                    double chanceToRollNumber = dice[i].chanceToMeetTarget(side);
+                    double increase = dice[i].averageResult() - side;
+                    double increseTimesChance = increase * chanceToRollNumber;
+                    dieIncrease += increseTimesChance;
+                }
+                Increases[i] = dieIncrease;
+            }
+            Increases.Sort();
+            Increases.Reverse();
+            double averageIncrease = 0;
+            for (int i = 0; i < rerollCountOfDie && i < Increases.Count; i++)
+            {
+                averageIncrease += Increases[i];
+            }
+            return damage + averageIncrease;
         }
         private double averageAfterRollUseHighest(double damage, Die[] dice)
         {
             //TODO
             return damage;
         }
-
         public double averageCriticalHitDamage()
         {
             double damage = 0;
