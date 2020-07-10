@@ -1,4 +1,8 @@
-﻿namespace WebDPRCalc.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace WebDPRCalc.Models
 {
     public class Die
     {
@@ -53,5 +57,63 @@
                 return successChance;
             }
         }
+        public static Die[] fromString(string data)
+        {
+            try
+            {
+                data = Regex.Replace(data, @"\s+", "");
+                var dieGroups = data.Split("+");
+                List<Die> result = new List<Die>();
+                foreach (var dieGroup in dieGroups)
+                {
+                    result.AddRange(dieGroupFromString(dieGroup));
+                }
+                return result.ToArray();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+        private static Die[] dieGroupFromString(string dieGroupData)
+        {
+            int dieCount;
+            string[] dataSplit = dieGroupData.Split('d');
+            int.TryParse(dataSplit[0], out dieCount);
+            Die[] result = new Die[dieCount];
+            Die die = parseDieFromString(dataSplit[1]);
+            for (int i = 0; i < dieCount; i++)
+            {
+                result[i] = die;
+            }
+            return result;
+        }
+        private static Die parseDieFromString(string dieData)
+        {
+            int sides = 4;
+            int reroll = 0;
+            int min = 0;
+            Regex sidesFind = new Regex("(\\d*)\\D.*");
+            Regex rerollFind = new Regex(".*?r(\\d*)\\D.*");
+            Regex minFind = new Regex(".*?m(\\d*)\\D.*");
+            var m = sidesFind.Match(dieData);
+            if (m.Success)
+            {
+                int.TryParse(m.Groups[0].Value, out sides);
+            }
+            m = rerollFind.Match(dieData);
+            if (m.Success)
+            {
+                int.TryParse(m.Groups[0].Value, out reroll);
+            }
+            m = minFind.Match(dieData);
+            if (m.Success)
+            {
+                int.TryParse(m.Groups[0].Value, out min);
+            }
+            return new Die { sidesCount = sides, rerollAtBelow = reroll, mimumumNumber = min };
+        }
     }
+    //2d6(r2)+1d8(m2)+4d4+1d12(r2,m2)
 }
