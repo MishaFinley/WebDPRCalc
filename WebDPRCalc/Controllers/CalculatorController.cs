@@ -21,6 +21,13 @@ namespace WebDPRCalc.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult EditAttack(int n)
+        {
+            return View();
+        }
+
         public IActionResult ViewAttack()
         {
             return View();
