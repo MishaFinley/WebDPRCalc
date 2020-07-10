@@ -2,8 +2,6 @@
 {
     public class Attack
     {
-        [BsonId]
-        public ObjectId _id { get; set; }
         public int id { get; set; }
         public string name { get; set; }
         public AttackRoll attackRoll { get; set; }
