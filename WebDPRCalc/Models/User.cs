@@ -9,9 +9,6 @@ namespace WebDPRCalc.Models
         public string username;
         private byte[] password;
         public List<Attack> attacks;
-
-
-
         public bool validPassword(string password)
         {
             byte[] hashedPassword = hashPassword(password);

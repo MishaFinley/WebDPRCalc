@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -6,35 +6,39 @@
     <div class="title">DPRCFDND</div>
 
     <div class="home-menu">
-        <div class="hm-item">
-            <a class="hm-link" asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
-            <br />
-        </div>
-
-        <div class="logged-in">
+        @if (Context.Session.GetString("username") == null)
+        {
             <div class="hm-item">
-                <a class="hm-link" asp-controller="User" asp-action="Login">Login</a>
+                <a class="hm-link" asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
                 <br />
             </div>
 
-            <div class="hm-item">
-                <a class="hm-link" asp-controller="User" asp-action="Create Account">Create Account</a>
-                <br />
-            </div>
-        </div>
+            <div class="logged-in">
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Login">Login</a>
+                    <br />
+                </div>
 
-        <br/>
-
-        <div class="logged-out">
-            <div class="hm-item">
-                <a class="hm-link" asp-controller="Calculator" asp-action="AttackList">Create Account</a>
-                <br />
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Create Account">Create Account</a>
+                    <br />
+                </div>
             </div>
+        }
+        else
+        {
 
-            <div class="hm-item">
-                <a class="hm-link" asp-controller="User" asp-action="Profile">View Profile</a>
-                <br />
+            <div class="logged-out">
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="Calculator" asp-action="AttackList">Attack List</a>
+                    <br />
+                </div>
+
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Profile">View Profile</a>
+                    <br />
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>

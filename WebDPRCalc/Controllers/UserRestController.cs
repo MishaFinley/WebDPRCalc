@@ -14,7 +14,7 @@ namespace WebDPRCalc.Controllers
     {
         public async Task<User> GetContextUser()
         { return await Authenticate(HttpContext); }
-        private UserDatabaseInterface dbInterface = new UserDatabaseInterface();
+        public static UserDatabaseInterface dbInterface = new UserDatabaseInterface();
         public async Task<User> Authenticate(HttpContext context)
         {
             string authHeader = context.Request.Headers["Authorization"];
@@ -26,7 +26,7 @@ namespace WebDPRCalc.Controllers
                 int seperatorIndex = usernamePassword.IndexOf(':');
                 string username = usernamePassword.Substring(0, seperatorIndex);
                 string password = usernamePassword.Substring(seperatorIndex + 1);
-                User user = await dbInterface.readUser(username);
+                User user = UserDatabaseInterface.readUser(username);
                 if (!(user is null))
                 {
                     if (user.validPassword(password))
@@ -45,7 +45,7 @@ namespace WebDPRCalc.Controllers
             try
             {
                 parsed = (User)user;
-                dbInterface.createUser(parsed);
+                UserDatabaseInterface.createUser(parsed);
             }
             catch (InvalidCastException)
             {
@@ -61,7 +61,7 @@ namespace WebDPRCalc.Controllers
                 Response.StatusCode = 403;
                 return null;
             }
-            return new JavaScriptSerializer().Serialize(await dbInterface.readUser(context.username));
+            return new JavaScriptSerializer().Serialize(UserDatabaseInterface.readUser(context.username));
         }
         [HttpPatch]
         public async void UpdateUser([FromBody] object user)
@@ -78,7 +78,7 @@ namespace WebDPRCalc.Controllers
                     return;
                 }
                 parsed.attacks = context.attacks;
-                dbInterface.updateUser(parsed);
+                UserDatabaseInterface.updateUser(parsed);
             }
             catch (InvalidCastException)
             {
@@ -94,7 +94,7 @@ namespace WebDPRCalc.Controllers
                 Response.StatusCode = 403;
                 return;
             }
-            dbInterface.deleteUser(context.username);
+            UserDatabaseInterface.deleteUser(context.username);
         }
         [HttpPost("attack")]
         public async void CreateAttack([FromBody] object attack)
@@ -109,7 +109,7 @@ namespace WebDPRCalc.Controllers
             try
             {
                 parsed = (Attack)attack;
-                dbInterface.createAttack(context.username, parsed);
+                UserDatabaseInterface.createAttack(context.username, parsed);
             }
             catch (Exception ex)
             {
@@ -134,7 +134,7 @@ namespace WebDPRCalc.Controllers
             }
             try
             {
-                return new JavaScriptSerializer().Serialize(dbInterface.readAttack(context.username, id));
+                return new JavaScriptSerializer().Serialize(UserDatabaseInterface.readAttack(context.username, id));
             }
             catch (ArgumentException ex)
             {
@@ -153,7 +153,7 @@ namespace WebDPRCalc.Controllers
             }
             try
             {
-                return new JavaScriptSerializer().Serialize(dbInterface.readAttacks(context.username));
+                return new JavaScriptSerializer().Serialize(UserDatabaseInterface.readAttacks(context.username));
             }
             catch (ArgumentException ex)
             {
@@ -174,7 +174,7 @@ namespace WebDPRCalc.Controllers
             try
             {
                 parsed = (Attack)attack;
-                dbInterface.updateAttack(context.username, parsed);
+                UserDatabaseInterface.updateAttack(context.username, parsed);
             }
             catch (Exception ex)
             {
@@ -199,7 +199,7 @@ namespace WebDPRCalc.Controllers
             }
             try
             {
-                dbInterface.deleteAttack(context.username, id);
+                UserDatabaseInterface.deleteAttack(context.username, id);
             }
             catch (ArgumentException ex)
             {
@@ -217,7 +217,7 @@ namespace WebDPRCalc.Controllers
             }
             try
             {
-                var attack = await dbInterface.readAttack(context.username, id);
+                var attack = UserDatabaseInterface.readAttack(context.username, id);
                 return new JavaScriptSerializer().Serialize(attack.DPRCaclulation());
             }
             catch (ArgumentException ex)

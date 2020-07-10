@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebDPRCalc.Models;
 
 namespace WebDPRCalc.Controllers
 {
@@ -12,10 +10,29 @@ namespace WebDPRCalc.Controllers
         {
             return View();
         }
-
         public IActionResult Login()
         {
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
+            User check = UserDatabaseInterface.readUser(username);
+            if (!(check is null) && check.validPassword(password))
+            {
+                HttpContext.Session.SetString("username", username);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult CreateAccount()

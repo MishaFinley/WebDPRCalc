@@ -2,7 +2,7 @@
 {
     public class Attack
     {
-        public int id = 0;
+        public int id { get; set; }
         public string name { get; set; }
         public AttackRoll attackRoll { get; set; }
         public DamageRoll damageRoll { get; set; }
