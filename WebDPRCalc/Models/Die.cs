@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace WebDPRCalc.Models
@@ -58,14 +59,22 @@ namespace WebDPRCalc.Models
         }
         public static Die[] fromString(string data)
         {
-            data = Regex.Replace(data, @"\s+", "");
-            var dieGroups = data.Split("+");
-            List<Die> result = new List<Die>();
-            foreach (var dieGroup in dieGroups)
+            try
             {
-                result.AddRange(dieGroupFromString(dieGroup));
+                data = Regex.Replace(data, @"\s+", "");
+                var dieGroups = data.Split("+");
+                List<Die> result = new List<Die>();
+                foreach (var dieGroup in dieGroups)
+                {
+                    result.AddRange(dieGroupFromString(dieGroup));
+                }
+                return result.ToArray();
             }
-            return result.ToArray();
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
         private static Die[] dieGroupFromString(string dieGroupData)
         {
@@ -106,5 +115,5 @@ namespace WebDPRCalc.Models
             return new Die { sidesCount = sides, rerollAtBelow = reroll, mimumumNumber = min };
         }
     }
-    //2d6(r2)+1d8(m1)
+    //2d6(r2)+1d8(m2)+4d4+1d12(r2,m2)
 }
