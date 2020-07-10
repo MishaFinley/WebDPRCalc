@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebDPRCalc.Models;
 
 namespace WebDPRCalc.Controllers
 {
@@ -23,8 +25,17 @@ namespace WebDPRCalc.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditAttack(int n)
+        public IActionResult EditAttack(FormCollection fc)
         {
+
+            AttackRoll atkroll = new AttackRoll();
+
+            DamageRoll dmgRoll = new DamageRoll();
+
+
+            Attack attack = new Attack();
+            attack.name = fc["atkname"];
+            attack.id = int.Parse(fc["id"]);
             return View();
         }
 

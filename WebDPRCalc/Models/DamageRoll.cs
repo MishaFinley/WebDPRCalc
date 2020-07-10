@@ -2,12 +2,12 @@
 {
     public class DamageRoll
     {
-        private Die[] dice = new Die[0];
-        private int numericalAddition;
-        private bool resisted;
-        private Die[] additionalCritDice = new Die[0];
-        private int rerollCountOfDie;
-        private int rollUseHighest = 1;
+        private Die[] dice { get; set; }
+        private int numericalAddition { get; set; }
+        private bool resisted { get; set; }
+        private Die[] additionalCritDice { get; set; }
+        private int rerollCountOfDie { get; set; }
+        private int rollUseHighest { get; set; }
 
         public double averageNormalHitDamage()
         {
