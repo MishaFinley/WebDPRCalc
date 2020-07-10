@@ -4,12 +4,12 @@ namespace WebDPRCalc.Models
 {
     public class DamageRoll
     {
-        private Die[] dice { get; set; }
-        private int numericalAddition { get; set; }
-        private bool resisted { get; set; }
-        private Die[] additionalCritDice { get; set; }
-        private int rerollCountOfDie { get; set; }
-        private int rollUseHighest { get; set; }
+        public Die[] dice { get; set; }
+        public int numericalAddition { get; set; }
+        public bool resisted { get; set; }
+        public Die[] additionalCritDice { get; set; }
+        public int rerollCountOfDie { get; set; }
+        public int rollUseHighest { get; set; }
 
         public double averageNormalHitDamage()
         {
