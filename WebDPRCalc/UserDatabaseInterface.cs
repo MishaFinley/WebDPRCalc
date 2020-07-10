@@ -22,10 +22,10 @@ namespace WebDPRCalc
         {
             await users.InsertOneAsync(ToBson(user));
         }
-        public async Task<User> readUser(string username)
+        public User readUser(string username)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("username", username);
-            var document = await users.Find(filter).FirstOrDefaultAsync();
+            var document = users.Find(filter).FirstOrDefault();
             if (document is null)
                 return null;
             document.Remove("_id");
@@ -44,7 +44,7 @@ namespace WebDPRCalc
         }
         public async void createAttack(string username, Attack attack)
         {
-            var user = await readUser(username);
+            var user = readUser(username);
             if (!(user is null))
             {
                 if (user.attacks.Count > 0)
@@ -73,7 +73,7 @@ namespace WebDPRCalc
         }
         public async Task<List<Attack>> readAttacks(string username)
         {
-            var user = await readUser(username);
+            var user = readUser(username);
             if (!(user is null))
             {
                 return user.attacks;
@@ -82,7 +82,7 @@ namespace WebDPRCalc
         }
         public async void updateAttack(string username, Attack attack)
         {
-            var user = await readUser(username);
+            var user = readUser(username);
             if (!(user is null))
             {
                 var attacks = user.attacks;
@@ -103,7 +103,7 @@ namespace WebDPRCalc
         }
         public async void deleteAttack(string username, int attackId)
         {
-            var user = await readUser(username);
+            var user = readUser(username);
             if (!(user is null))
             {
                 var attacks = user.attacks;

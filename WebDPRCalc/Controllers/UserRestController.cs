@@ -14,7 +14,7 @@ namespace WebDPRCalc.Controllers
     {
         public async Task<User> GetContextUser()
         { return await Authenticate(HttpContext); }
-        private UserDatabaseInterface dbInterface = new UserDatabaseInterface();
+        public static UserDatabaseInterface dbInterface = new UserDatabaseInterface();
         public async Task<User> Authenticate(HttpContext context)
         {
             string authHeader = context.Request.Headers["Authorization"];
@@ -26,7 +26,7 @@ namespace WebDPRCalc.Controllers
                 int seperatorIndex = usernamePassword.IndexOf(':');
                 string username = usernamePassword.Substring(0, seperatorIndex);
                 string password = usernamePassword.Substring(seperatorIndex + 1);
-                User user = await dbInterface.readUser(username);
+                User user = dbInterface.readUser(username);
                 if (!(user is null))
                 {
                     if (user.validPassword(password))
@@ -61,7 +61,7 @@ namespace WebDPRCalc.Controllers
                 Response.StatusCode = 403;
                 return null;
             }
-            return new JavaScriptSerializer().Serialize(await dbInterface.readUser(context.username));
+            return new JavaScriptSerializer().Serialize(dbInterface.readUser(context.username));
         }
         [HttpPatch]
         public async void UpdateUser([FromBody] object user)
