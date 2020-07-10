@@ -17,7 +17,7 @@
             };
             for (int i = 0; i < 41; i++)
             {
-                calc.dPRFragments[0] = new AttackDPRFragment
+                calc.dPRFragments[i] = new AttackDPRFragment
                 {
                     ac = i + 5,
                     hitChance = attackRoll.hitChance(i + 5),
