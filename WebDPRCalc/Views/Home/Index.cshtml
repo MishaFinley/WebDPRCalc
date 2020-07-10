@@ -1,27 +1,44 @@
-﻿@using Microsoft.AspNetCore.Http;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-    <div class="text-center">
-        <h1 class="display-4">DPRCFDND</h1>
+<div class="cont">
+    <div class="title">DPRCFDND</div>
+
+    <div class="home-menu">
         @if (Context.Session.GetString("username") == null)
         {
-            <a asp-controller="User" asp-action="Login">Login</a>
-            <br />
-            <a asp-controller="User" asp-action="CreateAccount">Create Account</a>
-            <br />
-            <a asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
-            <br />
+            <div class="hm-item">
+                <a class="hm-link" asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
+                <br />
+            </div>
+
+            <div class="logged-in">
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Login">Login</a>
+                    <br />
+                </div>
+
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Create Account">Create Account</a>
+                    <br />
+                </div>
+            </div>
         }
         else
         {
 
-            <a asp-controller="Calculator" asp-action="AttackList">View Attacks</a>
-            <br />
-            <a asp-controller="User" asp-action="Profile">View Profile</a>
-            <br />
-            <a asp-controller="User" asp-action="Logout">Logout</a>
-            <br />
+            <div class="logged-out">
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="Calculator" asp-action="AttackList">Attack List</a>
+                    <br />
+                </div>
+
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Profile">View Profile</a>
+                    <br />
+                </div>
+            </div>
         }
     </div>
+</div>
