@@ -2,15 +2,17 @@
 {
     public class AttackRoll
     {
-        private int numericalAddition;
-        private bool advantage;
-        private bool disadvantage;
-        private bool luckyDie;
-        private bool elvenAccuracy;
-        private int critRangeCount = 1;
-        private bool halfingLuck;
-        private Die[] diceAddition = new Die[0];
-        private bool rerollMiss;
+        public int numericalAddition { get; set; }
+        private bool advantage { get; set; }
+        public bool disadvantage { get; set; }
+        public bool luckyDie { get; set; }
+        public bool elvenAccuracy { get; set; }
+        public int critRangeCount { get; set; }
+        public bool halfingLuck { get; set; }
+        public Die[] diceAddition = new Die[0];
+        public bool rerollMiss { get; set; }
+
+
 
         private double averageDiceAddition()
         {
