@@ -2,7 +2,9 @@
 {
     public class Attack
     {
-        public int id = 0;
+        [BsonId]
+        public ObjectId _id { get; set; }
+        public int id { get; set; }
         public string name { get; set; }
         public AttackRoll attackRoll { get; set; }
         public DamageRoll damageRoll { get; set; }
