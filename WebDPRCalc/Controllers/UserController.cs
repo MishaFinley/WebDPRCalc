@@ -20,7 +20,7 @@ namespace WebDPRCalc.Controllers
         public IActionResult Login(string username, string password)
         {
             User check = UserDatabaseInterface.readUser(username);
-            if (!(check is null) && check.validPassword(password))
+            if (!(check is null) && check.validPassword(password, username))
             {
                 HttpContext.Session.SetString("username", username);
                 return RedirectToAction("Index", "Home");

@@ -60,9 +60,9 @@ namespace WebDPRCalc.Controllers
 
             string username = Convert.ToString(HttpContext.Session.Get("username"));
             AttackDPRCaclulation result = attack.DPRCaclulation();
-            if (!(username is null))
+            if (!(HttpContext.Session.Get("username") is null))
             {
-                UserDatabaseInterface.createAttack("london", attack);
+                UserDatabaseInterface.createAttack(username, attack);
             }
 
             return View(attack);
