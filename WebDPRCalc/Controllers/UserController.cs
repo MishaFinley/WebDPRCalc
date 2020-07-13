@@ -56,7 +56,17 @@ namespace WebDPRCalc.Controllers
 
         public IActionResult Profile()
         {
-            return View();
+            string username = HttpContext.Session.GetString("username");
+            User user = UserDatabaseInterface.readUser(username);
+            if (username is null || user is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.profile = user;
+                return View();
+            }
         }
 
     }
