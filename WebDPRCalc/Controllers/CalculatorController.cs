@@ -116,12 +116,12 @@ namespace WebDPRCalc.Controllers
                 {
                     ViewBag.attack = attack;
                     ViewBag.calculation = attack.DPRCaclulation();
-                    HttpContext.Session.SetString("attack", null);
+                    HttpContext.Session.Remove("attack");
                     return View();
                 }
             }
             catch (Exception) { }
-            HttpContext.Session.SetString("attack", null);
+            HttpContext.Session.Remove("attack");
             return RedirectToAction("Index", "Home");
         }
         public IActionResult Tutorial()
