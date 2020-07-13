@@ -67,10 +67,10 @@ namespace WebDPRCalc.Models
         public double averageCriticalHitDamage()
         {
             double damage = 0;
-            Die[] combinedDice = new Die[dice.Length * 2 + additionalCritDice.Length];
+            Die[] combinedDice = new Die[(dice.Length * 2) + additionalCritDice.Length];
             dice.CopyTo(combinedDice, 0);
             dice.CopyTo(combinedDice, dice.Length);
-            additionalCritDice.CopyTo(combinedDice, dice.Length + additionalCritDice.Length);
+            additionalCritDice.CopyTo(combinedDice, dice.Length * 2);
             //Damage Die
             foreach (Die die in combinedDice)
                 damage += die.averageResult();
@@ -90,7 +90,7 @@ namespace WebDPRCalc.Models
                 damage = (damage / 2) > 0.5 ? (damage / 2) - 0.5 : (damage / 2);
             else if (resisted)
                 damage = damage / 2;
-            return 0;
+            return damage;
         }
         public double averageDamage(double hitChance, double critChance)
         {

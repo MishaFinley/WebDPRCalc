@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nancy.Json;
 using System;
 using WebDPRCalc.Models;
 
@@ -29,16 +30,38 @@ namespace WebDPRCalc.Controllers
         public IActionResult EditAttack(int id = -1)
         {
             string username = HttpContext.Session.GetString("username");
+            Attack attack = null;
             try
             {
-                var attack = UserDatabaseInterface.readAttack(username, id);
-                if (!(username is null) && !(attack is null))
-                {
-                    ViewBag.attack = attack;
-                }
-                else { ViewBag.attack = null; }
+                attack = UserDatabaseInterface.readAttack(username, id);
             }
-            catch (Exception) { ViewBag.attack = null; }
+            catch (Exception)
+            {
+            }
+            if (username is null || attack is null)
+            {
+                attack = new Attack
+                {
+                    id = -1,
+                    name = "",
+                    attackRoll = new AttackRoll
+                    {
+                        diceAddition = new Die[0],
+                        critRangeCount = 1,
+                        numericalAddition = 0,
+                    },
+                    damageRoll = new DamageRoll
+                    {
+                        additionalCritDice = new Die[0],
+                        numericalAddition = 0,
+                        dice = new Die[0]
+                    }
+                };
+            }
+            ViewBag.attack = attack;
+            ViewBag.hitdice = Die.ToString(attack.attackRoll.diceAddition);
+            ViewBag.dmgdice = Die.ToString(attack.damageRoll.dice);
+            ViewBag.critdice = Die.ToString(attack.damageRoll.additionalCritDice);
             return View();
         }
 
@@ -47,7 +70,11 @@ namespace WebDPRCalc.Controllers
         {
 
             AttackRoll atkroll = new AttackRoll();
-            atkroll.numericalAddition = int.Parse(fc["atkmod"]);
+            try
+            {
+                atkroll.numericalAddition = int.Parse(fc["atkmod"]);
+            }
+            catch (Exception) { }
             try
             {
                 atkroll.critRangeCount = int.Parse(fc["critrange"]);
@@ -60,7 +87,11 @@ namespace WebDPRCalc.Controllers
             atkroll.diceAddition = Die.fromString(fc["tohit"]);
 
             DamageRoll dmgRoll = new DamageRoll();
-            dmgRoll.numericalAddition = int.Parse(fc["dmgmod"]);
+            try
+            {
+                dmgRoll.numericalAddition = int.Parse(fc["dmgmod"]);
+            }
+            catch (Exception) { }
             dmgRoll.resisted = fc["resist"] == "on" ? true : false;
             dmgRoll.dice = Die.fromString(fc["dmgdice"]);
             try
@@ -80,19 +111,65 @@ namespace WebDPRCalc.Controllers
             attack.damageRoll = dmgRoll;
 
             string username = HttpContext.Session.GetString("username");
-            AttackDPRCaclulation result = attack.DPRCaclulation();
+            //AttackDPRCaclulation result = attack.DPRCaclulation();
             if (!(HttpContext.Session.Get("username") is null))
             {
-                UserDatabaseInterface.createAttack(username, attack);
+                if (attack.id == -1)
+                {
+                    attack.id = 0;
+                    UserDatabaseInterface.createAttack(username, attack);
+                }
+                else
+                {
+                    UserDatabaseInterface.updateAttack(username, attack);
+                }
+                return RedirectToAction("ViewAttack", new { id = attack.id });
+            }
+            else
+            {
+                HttpContext.Session.SetString("attack", new JavaScriptSerializer().Serialize(attack));
+                return RedirectToAction("ViewAttack");
             }
 
-            return RedirectToAction("ViewAttack", new { res = result });
         }
-
-        public IActionResult ViewAttack(AttackDPRCaclulation result)
+        public IActionResult DeleteAttack(int id)
         {
-            ViewBag.caculation = result;
-            return View();
+            string username = HttpContext.Session.GetString("username");
+            try
+            {
+                UserDatabaseInterface.deleteAttack(username, id);
+            }
+            catch { }
+            return RedirectToAction("AttackList");
+        }
+        public IActionResult ViewAttack(int id = -1)
+        {
+            string username = HttpContext.Session.GetString("username");
+            Attack attack = null;
+            try
+            {
+                attack = UserDatabaseInterface.readAttack(username, id);
+            }
+            catch (Exception) { }
+            if (attack is null)
+            {
+                try
+                {
+                    attack = new JavaScriptSerializer().Deserialize<Attack>(HttpContext.Session.GetString("attack"));
+                }
+                catch (Exception) { }
+            }
+            if (!(attack is null))
+            {
+                var calc = attack.DPRCaclulation();
+                ViewBag.attack = attack;
+                ViewBag.calculation = calc;
+                ViewBag.calculationJs = new JavaScriptSerializer().Serialize(calc);
+                HttpContext.Session.Remove("attack");
+                return View();
+            }
+            HttpContext.Session.Remove("attack");
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult Tutorial()
         {

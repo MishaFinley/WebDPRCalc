@@ -138,6 +138,7 @@ namespace WebDPRCalc.Models
                     if (dieGroups[i].die.Equals(die))
                     {
                         dieGroups[i].count++;
+                        added = true;
                     }
                 }
                 if (!added)
@@ -183,7 +184,7 @@ namespace WebDPRCalc.Models
                 }
                 sb.Append(')');
             }
-            return base.ToString();
+            return sb.ToString();
         }
     }
 

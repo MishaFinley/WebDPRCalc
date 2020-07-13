@@ -105,7 +105,11 @@ namespace WebDPRCalc
                 }
                 updateUser(user);
             }
-            throw new ArgumentException("User does not exist");
+            else
+            {
+                throw new ArgumentException("User does not exist");
+
+            }
         }
         public static void deleteAttack(string username, int attackId)
         {
@@ -126,7 +130,10 @@ namespace WebDPRCalc
                 }
                 updateUser(user);
             }
-            throw new ArgumentException("User does not exist");
+            else
+            {
+                throw new ArgumentException("User does not exist");
+            }
         }
     }
 }
