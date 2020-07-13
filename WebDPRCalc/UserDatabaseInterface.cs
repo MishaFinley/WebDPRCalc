@@ -53,7 +53,10 @@ namespace WebDPRCalc
                 user.attacks.Add(attack);
                 updateUser(user);
             }
-            throw new ArgumentException("User does not exist");
+            else
+            {
+                throw new ArgumentException("User does not exist");
+            }
         }
         public static Attack readAttack(string username, int attackID)
         {

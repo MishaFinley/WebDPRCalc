@@ -6,9 +6,9 @@ namespace WebDPRCalc.Models
 {
     public class User
     {
-        public string username;
-        private byte[] password;
-        public List<Attack> attacks;
+        public string username { get; set; }
+        public byte[] password { get; set; }
+        public List<Attack> attacks { get; set; }
         public bool validPassword(string password)
         {
             byte[] hashedPassword = hashPassword(password);
@@ -19,7 +19,7 @@ namespace WebDPRCalc.Models
             return false;
         }
 
-        public byte[] hashPassword(string password)
+        public static byte[] hashPassword(string password)
         {
             byte[] salt = new byte[128 / 8];
             using (var rng = RandomNumberGenerator.Create())
