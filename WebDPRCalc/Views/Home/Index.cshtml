@@ -24,24 +24,18 @@
         }
         else
         {
+            <div class="logged-out">
 
-    <div class="logged-out">
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="Calculator" asp-action="AttackList">Attack List</a>
+                    <br />
+                </div>
 
-        <div class="hm-item">
-            <a class="hm-link" asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
-            <br />
-        </div>
-
-        <div class="hm-item">
-            <a class="hm-link" asp-controller="Calculator" asp-action="AttackList">Attack List</a>
-            <br />
-        </div>
-
-        <div class="hm-item">
-            <a class="hm-link" asp-controller="User" asp-action="Profile">View Profile</a>
-            <br />
-        </div>
-    </div>
+                <div class="hm-item">
+                    <a class="hm-link" asp-controller="User" asp-action="Profile">View Profile</a>
+                    <br />
+                </div>
+            </div>
         }
 
         <div class="hm-item">
