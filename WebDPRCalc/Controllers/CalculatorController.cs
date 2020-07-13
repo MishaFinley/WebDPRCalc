@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using WebDPRCalc.Models;
 
 namespace WebDPRCalc.Controllers
@@ -30,7 +27,11 @@ namespace WebDPRCalc.Controllers
 
             AttackRoll atkroll = new AttackRoll();
             atkroll.numericalAddition = int.Parse(fc["atkmod"]);
-            atkroll.critRangeCount = int.Parse(fc["critrange"]);
+            try
+            {
+                atkroll.critRangeCount = int.Parse(fc["critrange"]);
+            }
+            catch (Exception) { atkroll.critRangeCount = 1; }
             atkroll.luckyDie = fc["lucky"] == "on" ? true : false;
             atkroll.elvenAccuracy = fc["elvenacc"] == "on" ? true : false;
             atkroll.halfingLuck = fc["halflucky"] == "on" ? true : false;
@@ -41,19 +42,35 @@ namespace WebDPRCalc.Controllers
             dmgRoll.numericalAddition = int.Parse(fc["dmgmod"]);
             dmgRoll.resisted = fc["resist"] == "on" ? true : false;
             dmgRoll.dice = Die.fromString(fc["dmgdice"]);
-            dmgRoll.rerollCountOfDie = int.Parse(fc["rerolldice"]);
-            dmgRoll.additionalCritDice = Die.fromString(fc["addcritdice"]);
-
+            try
+            {
+                dmgRoll.rerollCountOfDie = int.Parse(fc["rerolldice"]);
+            }
+            catch (Exception) { }
+            try
+            {
+                dmgRoll.additionalCritDice = Die.fromString(fc["addcritdice"]);
+            }
+            catch (Exception) { }
             Attack attack = new Attack();
             attack.name = fc["atkname"];
             attack.id = int.Parse(fc["id"]);
             attack.attackRoll = atkroll;
             attack.damageRoll = dmgRoll;
+
+            string username = Convert.ToString(HttpContext.Session.Get("username"));
+            AttackDPRCaclulation result = attack.DPRCaclulation();
+            if (!(username is null))
+            {
+                UserDatabaseInterface.createAttack("london", attack);
+            }
+
             return View(attack);
         }
 
         public IActionResult ViewAttack()
         {
+
             return View();
         }
         public IActionResult Tutorial()

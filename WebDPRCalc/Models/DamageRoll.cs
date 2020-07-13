@@ -48,7 +48,7 @@ namespace WebDPRCalc.Models
                     double increseTimesChance = increase * chanceToRollNumber;
                     dieIncrease += increseTimesChance;
                 }
-                Increases[i] = dieIncrease;
+                Increases.Add(dieIncrease);
             }
             Increases.Sort();
             Increases.Reverse();
