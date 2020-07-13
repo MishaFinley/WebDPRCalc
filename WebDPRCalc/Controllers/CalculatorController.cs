@@ -48,7 +48,11 @@ namespace WebDPRCalc.Controllers
         {
 
             AttackRoll atkroll = new AttackRoll();
-            atkroll.numericalAddition = int.Parse(fc["atkmod"]);
+            try
+            {
+                atkroll.numericalAddition = int.Parse(fc["atkmod"]);
+            }
+            catch (Exception) { }
             try
             {
                 atkroll.critRangeCount = int.Parse(fc["critrange"]);
@@ -61,7 +65,11 @@ namespace WebDPRCalc.Controllers
             atkroll.diceAddition = Die.fromString(fc["tohit"]);
 
             DamageRoll dmgRoll = new DamageRoll();
-            dmgRoll.numericalAddition = int.Parse(fc["dmgmod"]);
+            try
+            {
+                dmgRoll.numericalAddition = int.Parse(fc["dmgmod"]);
+            }
+            catch (Exception) { }
             dmgRoll.resisted = fc["resist"] == "on" ? true : false;
             dmgRoll.dice = Die.fromString(fc["dmgdice"]);
             try
@@ -84,7 +92,15 @@ namespace WebDPRCalc.Controllers
             //AttackDPRCaclulation result = attack.DPRCaclulation();
             if (!(HttpContext.Session.Get("username") is null))
             {
-                UserDatabaseInterface.createAttack(username, attack);
+                if (attack.id == -1)
+                {
+                    attack.id = 0;
+                    UserDatabaseInterface.createAttack(username, attack);
+                }
+                else
+                {
+                    UserDatabaseInterface.updateAttack(username, attack);
+                }
                 return RedirectToAction("ViewAttack", attack.id);
             }
             else
