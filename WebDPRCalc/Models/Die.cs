@@ -74,7 +74,6 @@ namespace WebDPRCalc.Models
             {
                 return new Die[0];
             }
-
         }
         private static Die[] dieGroupFromString(string dieGroupData)
         {
@@ -91,26 +90,30 @@ namespace WebDPRCalc.Models
         }
         private static Die parseDieFromString(string dieData)
         {
+            System.Console.WriteLine($"Die Data: {dieData}");
             int sides = 4;
             int reroll = 0;
             int min = 0;
-            Regex sidesFind = new Regex("(\\d*)\\D.*");
-            Regex rerollFind = new Regex(".*?r(\\d*)\\D.*");
-            Regex minFind = new Regex(".*?m(\\d*)\\D.*");
+            Regex sidesFind = new Regex("(\\d*)\\D?.*");
+            Regex rerollFind = new Regex(".*?r(\\d*)\\D?.*");
+            Regex minFind = new Regex(".*?m(\\d*)\\D?.*");
             var m = sidesFind.Match(dieData);
             if (m.Success)
             {
-                int.TryParse(m.Groups[0].Value, out sides);
+                int.TryParse(m.Groups[1].Value, out sides);
+                System.Console.WriteLine("sides success");
             }
             m = rerollFind.Match(dieData);
             if (m.Success)
             {
-                int.TryParse(m.Groups[0].Value, out reroll);
+                int.TryParse(m.Groups[1].Value, out reroll);
+                System.Console.WriteLine("reroll success");
             }
             m = minFind.Match(dieData);
             if (m.Success)
             {
-                int.TryParse(m.Groups[0].Value, out min);
+                int.TryParse(m.Groups[1].Value, out min);
+                System.Console.WriteLine("min success");
             }
             return new Die { sidesCount = sides, rerollAtBelow = reroll, mimumumNumber = min };
         }
