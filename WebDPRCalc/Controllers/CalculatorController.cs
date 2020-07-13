@@ -14,7 +14,17 @@ namespace WebDPRCalc.Controllers
 
         public IActionResult AttackList()
         {
-            return View();
+            string username = HttpContext.Session.GetString("username");
+            User user = UserDatabaseInterface.readUser(username);
+            if (username is null || user is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.attacks = user.attacks;
+                return View();
+            }
         }
         public IActionResult EditAttack()
         {
@@ -70,7 +80,7 @@ namespace WebDPRCalc.Controllers
 
         public IActionResult ViewAttack(AttackDPRCaclulation result)
         {
-
+            ViewBag.caculation = result;
             return View();
         }
         public IActionResult Tutorial()
