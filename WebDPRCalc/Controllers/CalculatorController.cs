@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nancy.Json;
 using System;
 using WebDPRCalc.Models;
 
@@ -80,19 +81,48 @@ namespace WebDPRCalc.Controllers
             attack.damageRoll = dmgRoll;
 
             string username = HttpContext.Session.GetString("username");
-            AttackDPRCaclulation result = attack.DPRCaclulation();
+            //AttackDPRCaclulation result = attack.DPRCaclulation();
             if (!(HttpContext.Session.Get("username") is null))
             {
                 UserDatabaseInterface.createAttack(username, attack);
+                return RedirectToAction("ViewAttack", attack.id);
+            }
+            else
+            {
+                HttpContext.Session.SetString("attack", new JavaScriptSerializer().Serialize(attack));
+                return RedirectToAction("ViewAttack");
             }
 
-            return RedirectToAction("ViewAttack", new { res = result });
         }
 
-        public IActionResult ViewAttack(AttackDPRCaclulation result)
+        public IActionResult ViewAttack(int id = -1)
         {
-            ViewBag.caculation = result;
-            return View();
+            string username = HttpContext.Session.GetString("username");
+            try
+            {
+                var attack = UserDatabaseInterface.readAttack(username, id);
+                if (id != -1 && !(username is null))
+                {
+                    ViewBag.attack = attack;
+                    ViewBag.calculation = attack.DPRCaclulation();
+                    return View();
+                }
+            }
+            catch (Exception) { }
+            try
+            {
+                var attack = new JavaScriptSerializer().Deserialize<Attack>(HttpContext.Session.GetString("attack"));
+                if (!(attack is null))
+                {
+                    ViewBag.attack = attack;
+                    ViewBag.calculation = attack.DPRCaclulation();
+                    HttpContext.Session.SetString("attack", null);
+                    return View();
+                }
+            }
+            catch (Exception) { }
+            HttpContext.Session.SetString("attack", null);
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult Tutorial()
         {
