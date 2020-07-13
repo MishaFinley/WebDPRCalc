@@ -65,10 +65,10 @@ namespace WebDPRCalc.Controllers
                 UserDatabaseInterface.createAttack("london", attack);
             }
 
-            return View(attack);
+            return RedirectToAction("ViewAttack",result);
         }
 
-        public IActionResult ViewAttack()
+        public IActionResult ViewAttack(AttackDPRCaclulation result)
         {
 
             return View();
