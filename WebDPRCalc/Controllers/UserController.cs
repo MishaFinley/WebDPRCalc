@@ -19,7 +19,6 @@ namespace WebDPRCalc.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            UserDatabaseInterface.createUser(new Models.User { username = username, password = Models.User.hashPassword(password, username) });
             User check = UserDatabaseInterface.readUser(username);
             if (!(check is null) && check.validPassword(password, username))
             {

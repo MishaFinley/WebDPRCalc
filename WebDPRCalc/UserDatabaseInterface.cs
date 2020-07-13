@@ -46,9 +46,13 @@ namespace WebDPRCalc
             var user = readUser(username);
             if (!(user is null))
             {
-                if (user.attacks.Count > 0)
+                if (!(user.attacks is null) && user.attacks.Count > 0)
                 {
                     attack.id = user.attacks[user.attacks.Count - 1].id + 1;
+                }
+                else
+                {
+                    user.attacks = new List<Attack>();
                 }
                 user.attacks.Add(attack);
                 updateUser(user);
