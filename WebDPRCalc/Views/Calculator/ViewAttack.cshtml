@@ -3,18 +3,24 @@
 
 <h1>View Attack</h1>
 
-<span id="atkName">@ViewBag.attack.name</span>
-
-<span id="dmgPerHit">@ViewBag.calculation.averageDamagePerHit</span>
-
-<span id="dmgPerCrit">@ViewBag.calculation.averageDamagePerCrit</span>
-
-<span id="hitChance">@ViewBag.calculation.dPRFragments[12].hitChance</span>
-
-<span id="critChance">@ViewBag.calculation.dPRFragments[12].critChance</span>
-
-<span id="dmg">@ViewBag.calculation.dPRFragments[12].averageDamage</span>
-
+<div>
+    Name: <span id="atkName">@ViewBag.attack.name</span>
+</div>
+<div>
+    Average Damage Per Hit: <span id="dmgPerHit">@ViewBag.calculation.averageDamagePerHit</span>
+</div>
+<div>
+    Average Damage Per Crit: <span id="dmgPerCrit">@ViewBag.calculation.averageDamagePerCrit</span>
+</div>
+<div>
+    Hit Chance: <span id="hitChance">@ViewBag.calculation.dPRFragments[12].hitChance</span>
+</div>
+<div>
+    Crit Chance: <span id="critChance">@ViewBag.calculation.dPRFragments[12].critChance</span>
+</div>
+<div>
+    Average Damage: <span id="dmg">@ViewBag.calculation.dPRFragments[12].averageDamage</span>
+</div>
 <div class="slidecontainer">
     <label for="acSlider" id="acLabel">17</label>
     <input type="range" min="5" max="35" value="17" class="slider" id="acSlider">
