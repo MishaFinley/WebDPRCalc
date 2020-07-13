@@ -4,12 +4,12 @@ namespace WebDPRCalc.Models
 {
     public class DamageRoll
     {
-        private Die[] dice = new Die[0];
-        private int numericalAddition;
-        private bool resisted;
-        private Die[] additionalCritDice = new Die[0];
-        private int rerollCountOfDie;
-        private int rollUseHighest = 1;
+        public Die[] dice { get; set; }
+        public int numericalAddition { get; set; }
+        public bool resisted { get; set; }
+        public Die[] additionalCritDice { get; set; }
+        public int rerollCountOfDie { get; set; }
+        public int rollUseHighest { get; set; }
 
         public double averageNormalHitDamage()
         {
@@ -48,7 +48,7 @@ namespace WebDPRCalc.Models
                     double increseTimesChance = increase * chanceToRollNumber;
                     dieIncrease += increseTimesChance;
                 }
-                Increases[i] = dieIncrease;
+                Increases.Add(dieIncrease);
             }
             Increases.Sort();
             Increases.Reverse();
