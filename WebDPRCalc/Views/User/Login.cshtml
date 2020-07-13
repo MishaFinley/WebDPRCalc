@@ -3,25 +3,33 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-<form method="post" class="act-form">
-    <div class="inpStorage">
-        <!--//asp-for="Username"-->
-        <label class="inpLabel">Username:</label>
-        <input type="text" name="username" class="inp" />
+<div class="cont">
+    <div class="title">DPRCFDND</div>
 
-        <!--//asp-validation-for="Username"-->
-        <span></span>
+    <div class="form-cont">
+        <form method="post" class="act-form">
+            <div class="inp-cont-nbg">
+                <div class="inp-label-sized">
+                    <label class="inp-label">Username:</label>
+                </div>
+                <input type="text" name="username" class="inp-lg" />
+                <!--//asp-validation-for="Username"-->
+                <span></span>
+            </div>
+
+            <div class="inp-cont-nbg">
+                <!--//asp-for="Password"-->
+                <div class="inp-label-sized">
+                    <label class="inp-label">Password:</label>
+                </div>
+                <input type="password" name="password" class="inp-lg" />
+                <!--//asp-validation-for="Password"-->
+                <span></span>
+            </div>
+
+            <div class="flex-end">
+                <input class="button2" type="submit" value="Login" />
+            </div>
+        </form>
     </div>
-
-    <div class="inpStorage">
-        <!--//asp-for="Password"-->
-        <label class="inpLabel">Password:</label>
-        <input type="password" name="password" class="inp" />
-
-        <!--//asp-validation-for="Password"-->
-        <span></span>
-    </div>
-
-    <input class="button" type="submit" value="Login" />
-</form>
+</div>
