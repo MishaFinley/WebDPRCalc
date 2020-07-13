@@ -3,5 +3,24 @@
 
 <h1>View Attack</h1>
 
-<div>@ViewBag.attack.name</div>
-<div>@ViewBag.calculation.averageDamagePerHit</div>
+<span id="atkName">@ViewBag.attack.name</span>
+
+<span id="dmgPerHit">@ViewBag.calculation.averageDamagePerHit</span>
+
+<span id="dmgPerCrit">@ViewBag.calculation.averageDamagePerCrit</span>
+
+<span id="hitChance">@ViewBag.calculation.dPRFragments[12].hitChance</span>
+
+<span id="critChance">@ViewBag.calculation.dPRFragments[12].critChance</span>
+
+<span id="dmg">@ViewBag.calculation.dPRFragments[12].averageDamage</span>
+
+<div class="slidecontainer">
+    <label for="acSlider" id="acLabel">17</label>
+    <input type="range" min="5" max="35" value="17" class="slider" id="acSlider">
+</div>
+
+<script type="text/javascript" src="~/js/attack.js" rel=""></script>
+<script>
+    parseCalculation('@ViewBag.calculationJs');
+</script>

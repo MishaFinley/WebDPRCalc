@@ -90,7 +90,7 @@ namespace WebDPRCalc.Models
                 damage = (damage / 2) > 0.5 ? (damage / 2) - 0.5 : (damage / 2);
             else if (resisted)
                 damage = damage / 2;
-            return 0;
+            return damage;
         }
         public double averageDamage(double hitChance, double critChance)
         {

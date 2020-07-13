@@ -152,8 +152,10 @@ namespace WebDPRCalc.Controllers
             }
             if (!(attack is null))
             {
+                var calc = attack.DPRCaclulation();
                 ViewBag.attack = attack;
-                ViewBag.calculation = attack.DPRCaclulation();
+                ViewBag.calculation = calc;
+                ViewBag.calculationJs = new JavaScriptSerializer().Serialize(calc);
                 HttpContext.Session.Remove("attack");
                 return View();
             }
