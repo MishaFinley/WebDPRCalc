@@ -12,6 +12,77 @@ body {
     Classes
 ****************/
 
+.asp-btn {
+    width: 160px;
+    height: 32px;
+    background-color: #1e1e28;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color ease-out 0.4s;
+    border: 3px solid #1e1e28;
+}
+
+.asp-btn:hover {
+    background-color: #000000;
+}
+
+.asp-btn a {
+    text-decoration: none;
+    color: #e6e9f8;
+    transition: color ease-out 0.4s;
+}
+
+.asp-btn a:hover {
+    color: #9456F8;
+}
+
+.asp-btn a:visited {
+    text-decoration: none;
+    color: #e6e9f8;
+    transition: color ease-out 0.4s;
+}
+
+.asp-btn a:visited:hover {
+    color: #9456F8;
+}
+
+.button {
+    background-color: #3A255C;
+    color: #e6e9f8;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5em;
+    width: 200px;
+    height: 32px;
+}
+
+.button2 {
+    color: #e6e9f8;
+    background-color: #6E1E4B;
+    padding: 7px;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button:hover {
+    background-color: #1E0743;
+    color: #FF91CF;
+    transition: background-color ease-out 0.4s;
+    transition: color ease-out 0.4s;
+}
+
+.calc-part {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+}
+
+.cb {
+    margin: 3px 15px;
+}
+
 .cont {
     display: flex;
     flex-direction: column;
@@ -24,6 +95,19 @@ body {
     height: 15px;
     font-size: 13px;
     display: flex;
+}
+
+.form-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.flex-end {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .ftr {
@@ -81,6 +165,59 @@ body {
     color: #DB4B9C;
 }
 
+.inp-sm {
+    background-color: #A8ADC9;
+    color: black;
+    width: 70px;
+    margin: 5px;
+}
+
+.inp-md {
+    background-color: #A8ADC9;
+    color: black;
+    width: 120px;
+    margin: 5px;
+}
+
+.inp-lg {
+    background-color: #A8ADC9;
+    color: black;
+    width: 200px;
+    margin: 5px;
+}
+
+.inp-cont {
+    margin: 10px;
+    padding: 5px;
+    background-color: #1e1e28;
+    display: flex;
+    flex-direction: row;
+}
+
+.inp-cont-nbg {
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.inp-label {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px;
+}
+
+.inp-label-sized {
+    width: 180px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.inp-label-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25em;
+}
+
 .main {
 
 }
@@ -134,10 +271,70 @@ body {
     margin: 90px 20px 0px 20px;
 }
 
+.subtitle {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.85em;
+    display: flex;
+}
+
 .title {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 2.3em;
     display: flex;
     align-self: center;
     justify-self: center;
+}
+
+.vd {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+/************
+    IDs
+************/
+
+#atk-mod {
+    width: 70px;
+}
+
+#atk-name {
+    width: 200px;
+}
+
+#calc-cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#cdb-cont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#crit-range {
+    width: 70px;
+}
+
+#dmg-mod {
+    width: 70px;
+}
+
+#th-die {
+    width: 200px;
+}
+
+#to-damage {
+    margin: 66px 45px 40px 45px;
+}
+
+#to-hit {
+    margin: 66px 45px 40px 45px;
 }
