@@ -130,7 +130,10 @@ namespace WebDPRCalc
                 }
                 updateUser(user);
             }
-            throw new ArgumentException("User does not exist");
+            else
+            {
+                throw new ArgumentException("User does not exist");
+            }
         }
     }
 }

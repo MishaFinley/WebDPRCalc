@@ -132,7 +132,16 @@ namespace WebDPRCalc.Controllers
             }
 
         }
-
+        public IActionResult DeleteAttack(int id)
+        {
+            string username = HttpContext.Session.GetString("username");
+            try
+            {
+                UserDatabaseInterface.deleteAttack(username, id);
+            }
+            catch { }
+            return RedirectToAction("AttackList");
+        }
         public IActionResult ViewAttack(int id = -1)
         {
             string username = HttpContext.Session.GetString("username");
