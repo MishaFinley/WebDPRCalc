@@ -26,20 +26,21 @@ namespace WebDPRCalc.Controllers
                 return View();
             }
         }
-        public IActionResult EditAttack()
+        public IActionResult EditAttack(int id = -1)
         {
+            string username = HttpContext.Session.GetString("username");
+            try
+            {
+                var attack = UserDatabaseInterface.readAttack(username, id);
+                if (!(username is null) && !(attack is null))
+                {
+                    ViewBag.attack = attack;
+                }
+                else { ViewBag.attack = null; }
+            }
+            catch (Exception) { ViewBag.attack = null; }
             return View();
         }
-        //public IActionResult EditAttack(int id)
-        //{
-        //    string username = HttpContext.Session.GetString("username");
-        //    var attack = UserDatabaseInterface.readAttack(username, id);
-        //    if (!(username is null) && !(attack is null))
-        //    {
-        //        ViewBag.attack = attack;
-        //    }
-        //    return View();
-        //}
 
         [HttpPost]
         public IActionResult EditAttack(IFormCollection fc)

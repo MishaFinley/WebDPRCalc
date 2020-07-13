@@ -7,6 +7,7 @@
     {
 <div>
     <h2>@attack.name</h2>
-    <a class="hm-link" asp-controller="Calculator" asp-action="ViewAttack">View</a>
-    <a class="hm-link" asp-controller="Calculator" asp-action="EditAttack">Edit</a>
+    @*<a class="hm-link" asp-controller="Calculator" asp-action="ViewAttack">View</a>*@
+    @Html.ActionLink("Calculator", "ViewAttack", new { id = attack.id })
+    @Html.ActionLink("Calculator", "EditAttack", new { id = attack.id })
 </div> } }
