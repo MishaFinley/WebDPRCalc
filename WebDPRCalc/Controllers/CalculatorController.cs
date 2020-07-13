@@ -65,7 +65,7 @@ namespace WebDPRCalc.Controllers
                 UserDatabaseInterface.createAttack("london", attack);
             }
 
-            return RedirectToAction("ViewAttack",result);
+            return RedirectToAction("ViewAttack", new {res = result });
         }
 
         public IActionResult ViewAttack(AttackDPRCaclulation result)
