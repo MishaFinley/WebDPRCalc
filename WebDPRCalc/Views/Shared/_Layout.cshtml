@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,28 +15,37 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" asp-controller="User" asp-action="CreateAccount">Create Account</a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" asp-controller="User" asp-action="Login">Login</a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" asp-controller="User" asp-action="Profile">Profile</a>
-            </div>
-
-            <div class="menu-item">
                 <a class="menu-link" asp-controller="Calculator" asp-action="EditAttack">DPR Calculator</a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" asp-controller="Calculator" asp-action="AttackList">Attack List</a>
             </div>
 
             <div class="menu-item">
                 <a class="menu-link" asp-controller="Calculator" asp-action="Tutorial">Tutorial</a>
             </div>
+            @if (Context.Session.GetString("username") != null)
+            {
+                <div class="menu-item">
+                    <a class="menu-link" asp-controller="User" asp-action="Profile">Profile</a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link" asp-controller="Calculator" asp-action="AttackList">Attack List</a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link" asp-controller="User" asp-action="Logout">Logout</a>
+                </div>
+            }
+            else
+            {
+
+                <div class="menu-item">
+                    <a class="menu-link" asp-controller="User" asp-action="CreateAccount">Create Account</a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link" asp-controller="User" asp-action="Login">Login</a>
+                </div>
+            }
         </nav>
     </header>
 
