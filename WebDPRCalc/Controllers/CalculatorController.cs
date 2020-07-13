@@ -84,7 +84,15 @@ namespace WebDPRCalc.Controllers
             //AttackDPRCaclulation result = attack.DPRCaclulation();
             if (!(HttpContext.Session.Get("username") is null))
             {
-                UserDatabaseInterface.createAttack(username, attack);
+                if (attack.id == -1)
+                {
+                    attack.id = 0;
+                    UserDatabaseInterface.createAttack(username, attack);
+                }
+                else
+                {
+                    UserDatabaseInterface.updateAttack(username, attack);
+                }
                 return RedirectToAction("ViewAttack", attack.id);
             }
             else
