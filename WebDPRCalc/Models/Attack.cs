@@ -2,7 +2,7 @@
 {
     public class Attack
     {
-        public int id = 0;
+        public int id { get; set; }
         public string name { get; set; }
         public AttackRoll attackRoll { get; set; }
         public DamageRoll damageRoll { get; set; }
@@ -17,7 +17,7 @@
             };
             for (int i = 0; i < 41; i++)
             {
-                calc.dPRFragments[0] = new AttackDPRFragment
+                calc.dPRFragments[i] = new AttackDPRFragment
                 {
                     ac = i + 5,
                     hitChance = attackRoll.hitChance(i + 5),

@@ -19,7 +19,7 @@ namespace WebDPRCalc.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            User check = UserRestController.dbInterface.readUser(username);
+            User check = UserDatabaseInterface.readUser(username);
             if (!(check is null) && check.validPassword(password))
             {
                 HttpContext.Session.SetString("username", username);

@@ -72,7 +72,7 @@ namespace WebDPRCalc.Models
             }
             catch (Exception)
             {
-                return null;
+                return new Die[0];
             }
 
         }
