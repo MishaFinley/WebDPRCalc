@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace WebDPRCalc.Models
@@ -20,10 +19,10 @@ namespace WebDPRCalc.Models
         public static byte[] hashPassword(string password, string username)
         {
             byte[] salt = Encoding.UTF8.GetBytes(username);
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+            //using (var rng = RandomNumberGenerator.Create())
+            //{
+            //    rng.GetBytes(salt);
+            //}
             byte[] hashed = KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
