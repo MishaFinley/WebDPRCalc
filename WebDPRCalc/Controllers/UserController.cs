@@ -23,6 +23,7 @@ namespace WebDPRCalc.Controllers
             if (!(check is null) && check.validPassword(password))
             {
                 HttpContext.Session.SetString("username", username);
+
                 return RedirectToAction("Index", "Home");
             }
             return View();
