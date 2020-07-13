@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Linq;
+using System.Text;
 
 namespace WebDPRCalc.Models
 {
@@ -9,23 +10,19 @@ namespace WebDPRCalc.Models
         public string username { get; set; }
         public byte[] password { get; set; }
         public List<Attack> attacks { get; set; }
-        public bool validPassword(string password)
+        public bool validPassword(string password, string username)
         {
-            byte[] hashedPassword = hashPassword(password);
-            if (hashedPassword == this.password)
-            {
-                return true;
-            }
-            return false;
+            byte[] hashedPassword = hashPassword(password, username);
+            return hashedPassword.SequenceEqual(this.password);
         }
 
-        public static byte[] hashPassword(string password)
+        public static byte[] hashPassword(string password, string username)
         {
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+            byte[] salt = Encoding.UTF8.GetBytes(username);
+            //using (var rng = RandomNumberGenerator.Create())
+            //{
+            //    rng.GetBytes(salt);
+            //}
             byte[] hashed = KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,

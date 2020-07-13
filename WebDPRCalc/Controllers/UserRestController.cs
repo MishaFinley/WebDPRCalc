@@ -29,7 +29,7 @@ namespace WebDPRCalc.Controllers
                 User user = UserDatabaseInterface.readUser(username);
                 if (!(user is null))
                 {
-                    if (user.validPassword(password))
+                    if (user.validPassword(password, username))
                     {
                         return user;
                     }

@@ -58,14 +58,18 @@ namespace WebDPRCalc.Controllers
             attack.attackRoll = atkroll;
             attack.damageRoll = dmgRoll;
 
-            string username = Convert.ToString(HttpContext.Session.Get("username"));
+            string username = HttpContext.Session.GetString("username");
             AttackDPRCaclulation result = attack.DPRCaclulation();
-            if (!(username is null))
+            if (!(HttpContext.Session.Get("username") is null))
             {
-                UserDatabaseInterface.createAttack("london", attack);
+                UserDatabaseInterface.createAttack(username, attack);
             }
 
+<<<<<<< HEAD
             return RedirectToAction("ViewAttack", new {res = result });
+=======
+            return RedirectToAction("ViewAttack", result);
+>>>>>>> 0e4f50ddec45b4f9a85a0b502be5ecc41872b765
         }
 
         public IActionResult ViewAttack(AttackDPRCaclulation result)

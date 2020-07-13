@@ -20,7 +20,7 @@ namespace WebDPRCalc.Controllers
         public IActionResult Login(string username, string password)
         {
             User check = UserDatabaseInterface.readUser(username);
-            if (!(check is null) && check.validPassword(password))
+            if (!(check is null) && check.validPassword(password, username))
             {
                 HttpContext.Session.SetString("username", username);
 
@@ -38,6 +38,19 @@ namespace WebDPRCalc.Controllers
 
         public IActionResult CreateAccount()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateAccount(string username, string password, string passwordcon)
+        {
+            User check = UserDatabaseInterface.readUser(username);
+            if ((check is null) && password.Equals(passwordcon))
+            {
+                UserDatabaseInterface.createUser(new Models.User { username = username, password = Models.User.hashPassword(password, username) });
+                HttpContext.Session.SetString("username", username);
+
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
