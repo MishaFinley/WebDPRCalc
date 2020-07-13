@@ -14,10 +14,31 @@ namespace WebDPRCalc.Controllers
 
         public IActionResult AttackList()
         {
-            return View();
+            string username = HttpContext.Session.GetString("username");
+            User user = UserDatabaseInterface.readUser(username);
+            if (username is null || user is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.attacks = user.attacks;
+                return View();
+            }
         }
-        public IActionResult EditAttack()
+        public IActionResult EditAttack(int id = -1)
         {
+            string username = HttpContext.Session.GetString("username");
+            try
+            {
+                var attack = UserDatabaseInterface.readAttack(username, id);
+                if (!(username is null) && !(attack is null))
+                {
+                    ViewBag.attack = attack;
+                }
+                else { ViewBag.attack = null; }
+            }
+            catch (Exception) { ViewBag.attack = null; }
             return View();
         }
 
@@ -65,12 +86,12 @@ namespace WebDPRCalc.Controllers
                 UserDatabaseInterface.createAttack(username, attack);
             }
 
-            return RedirectToAction("ViewAttack", result);
+            return RedirectToAction("ViewAttack", new { res = result });
         }
 
         public IActionResult ViewAttack(AttackDPRCaclulation result)
         {
-
+            ViewBag.caculation = result;
             return View();
         }
         public IActionResult Tutorial()

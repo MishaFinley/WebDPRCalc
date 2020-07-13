@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace WebDPRCalc.Models
@@ -117,6 +118,74 @@ namespace WebDPRCalc.Models
             }
             return new Die { sidesCount = sides, rerollAtBelow = reroll, mimumumNumber = min };
         }
+        public override bool Equals(object obj)
+        {
+            if (obj is Die)
+            {
+                Die that = (Die)obj;
+                return that.sidesCount.Equals(this.sidesCount) && that.rerollAtBelow.Equals(this.rerollAtBelow) && that.mimumumNumber.Equals(this.mimumumNumber);
+            }
+            return base.Equals(obj);
+        }
+        public static string ToString(Die[] dice)
+        {
+            List<DieGroup> dieGroups = new List<DieGroup>();
+            foreach (var die in dice)
+            {
+                bool added = false;
+                for (int i = 0; i < dieGroups.Count; i++)
+                {
+                    if (dieGroups[i].die.Equals(die))
+                    {
+                        dieGroups[i].count++;
+                    }
+                }
+                if (!added)
+                {
+                    dieGroups.Add(new DieGroup { die = die, count = 1 });
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < dieGroups.Count; i++)
+            {
+                sb.Append(dieGroups[i].ToString());
+                if (i != dieGroups.Count - 1)
+                {
+                    sb.Append('+');
+                }
+            }
+            return sb.ToString();
+        }
     }
+    class DieGroup
+    {
+        public int count; public Die die;
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append(count);
+            sb.Append('d');
+            sb.Append(die.sidesCount);
+            if (die.rerollAtBelow != 0 || die.mimumumNumber != 0)
+            {
+                sb.Append('(');
+                if (die.rerollAtBelow != 0)
+                {
+                    sb.Append('r');
+                    sb.Append(die.rerollAtBelow);
+                }
+                if (die.rerollAtBelow != 0 && die.mimumumNumber != 0)
+                    sb.Append(',');
+                if (die.mimumumNumber != 0)
+                {
+                    sb.Append('m');
+                    sb.Append(die.mimumumNumber);
+                }
+                sb.Append(')');
+            }
+            return base.ToString();
+        }
+    }
+
     //2d6(r2)+1d8(m2)+4d4+1d12(r2,m2)
 }
