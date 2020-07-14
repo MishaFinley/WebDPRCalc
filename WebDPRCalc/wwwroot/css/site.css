@@ -47,6 +47,78 @@ body {
     color: #9456F8;
 }
 
+.atk-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    padding: 20px;
+    margin: 35px;
+    background-color: #1e1e28;
+}
+
+.atk-det {
+    padding: 3px;
+    margin: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.atk-list {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    padding: 16px;
+    background-color: #1e1e28;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.atk {
+    display: flex;
+    flex-direction: row;
+    background-color: #3A255C;
+    padding: 5px;
+    margin: 20px;
+    width: 80%;
+}
+
+.atk-name {
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.atk-opts {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.atk-opts a {
+    text-decoration: none;
+    color: #e6e9f8;
+}
+
+.atk-opts a:hover {
+    color: #FF91CF;
+    transition: color ease-out 0.4s;
+}
+
+.atk-opts a:visited {
+    color: #e6e9f8;
+}
+
+.atk-opts a:visited:hover {
+    color: #FF91CF;
+    transition: color ease-out 0.4s;
+}
+
 .button {
     background-color: #3A255C;
     color: #e6e9f8;
@@ -119,6 +191,7 @@ body {
     padding: 7px;
     margin: 14px;
     border: 1px solid black;
+    width: 90%;
 }
 
 .ex {
@@ -224,6 +297,14 @@ body {
     color: #DB4B9C;
 }
 
+.info-cont {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
 .inp-sm {
     background-color: #A8ADC9;
     color: black;
@@ -322,6 +403,10 @@ body {
     color: #9456F8;
 }
 
+.opt {
+    margin: 5px;
+}
+
 .rb {
     margin: 0px 5px;
 }
@@ -338,6 +423,14 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.85em;
     display: flex;
+}
+
+.subtitle2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .text-cont {
