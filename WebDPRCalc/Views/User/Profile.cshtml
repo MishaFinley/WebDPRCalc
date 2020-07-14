@@ -1,5 +1,14 @@
 ﻿
 @{ ViewData["Title"] = "Profile"; }
 
-<h1>Profile</h1>
-<h3>@ViewBag.profile.username</h3>
+<div class="cont">
+    <div class="title">DPRCFDND</div>
+    <div class="subtitle">@ViewData["Title"]</div>
+
+    <div class="profile">
+        <div class="info-cont">
+            <label>Username: </label>
+            <div id="user">@ViewBag.profile.username</div>
+        </div>
+    </div>
+</div>
