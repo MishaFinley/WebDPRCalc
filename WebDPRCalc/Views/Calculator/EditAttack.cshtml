@@ -25,17 +25,17 @@
                 <div class="calc-part">
                     <div class="inp-cont">
                         <div class="rb">
-                            <input type="radio" id="n" name="adv-btn" value="normal">
+                            <input type="radio" id="n" name="adv-btn" value="normal" @{if (!ViewBag.attack.attackRoll.advantage && !ViewBag.attack.attackRoll.disadvantage) { <text> checked</text>} }>
                             <label for="normal">Normal</label><br>
                         </div>
 
                         <div class="rb">
-                            <input type="radio" id="a" name="adv-btn" value="advantage">
+                            <input type="radio" id="a" name="adv-btn" value="advantage" @{if (ViewBag.attack.attackRoll.advantage && !ViewBag.attack.attackRoll.disadvantage) { <text> checked</text>} }>
                             <label for="female">Advantage</label><br>
                         </div>
 
                         <div class="rb">
-                            <input type="radio" id="d" name="adv-btn" value="disadvantage">
+                            <input type="radio" id="d" name="adv-btn" value="disadvantage" @{if (!ViewBag.attack.attackRoll.advantage && ViewBag.attack.attackRoll.disadvantage) { <text> checked</text>} }>
                             <label for="other">Disadvantage</label>
                         </div>
                     </div>
