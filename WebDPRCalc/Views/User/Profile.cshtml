@@ -1,39 +1,50 @@
 ﻿
 @{ ViewData["Title"] = "Profile"; }
 
-<h1>Profile</h1>
-<h2>@ViewBag.profile.username</h2>
-<h3>Charge Your Password</h3>
-<div class="form-cont">
-    <form method="post" class="act-form">
-        <div class="inp-cont-nbg">
-            <!--//asp-for="Password"-->
-            <div class="inp-label-sized">
-                <label class="inp-label">Old Password:</label>
-            </div>
-            <input type="password" name="old" class="inp-lg" />
-            <!--//asp-validation-for="Password"-->
-            <span></span>
-        </div>
-        <div class="inp-cont-nbg">
-            <!--//asp-for="Password"-->
-            <div class="inp-label-sized">
-                <label class="inp-label">New Password:</label>
-            </div>
-            <input type="password" name="password" class="inp-lg" />
-            <!--//asp-validation-for="Password"-->
-            <span></span>
+<div class="cont">
+    <div class="title">DPRCFDND</div>
+    <div class="subtitle">@ViewData["Title"]</div>
+
+    <div class="profile">
+        <div class="info-cont">
+            <label>Username: </label>
+            <div id="user">@ViewBag.profile.username</div>
         </div>
 
-        <div class="inp-cont-nbg">
-            <div class="inp-label-sized">
-                <label class="inp-label">Confirm Password:</label>
-            </div>
-            <input type="password" name="passwordcon" class="inp-lg" />
-            <span></span>
+        <div>Change your password below</div>
+        <div class="form-cont">
+            <form method="post" class="act-form">
+                <div class="inp-cont-nbg">
+                    <!--//asp-for="Password"-->
+                    <div class="inp-label-sized">
+                        <label class="inp-label">Old Password:</label>
+                    </div>
+                    <input type="password" name="old" class="inp-lg" />
+                    <!--//asp-validation-for="Password"-->
+                    <span></span>
+                </div>
+                <div class="inp-cont-nbg">
+                    <!--//asp-for="Password"-->
+                    <div class="inp-label-sized">
+                        <label class="inp-label">New Password:</label>
+                    </div>
+                    <input type="password" name="password" class="inp-lg" />
+                    <!--//asp-validation-for="Password"-->
+                    <span></span>
+                </div>
+
+                <div class="inp-cont-nbg">
+                    <div class="inp-label-sized">
+                        <label class="inp-label">Confirm Password:</label>
+                    </div>
+                    <input type="password" name="passwordcon" class="inp-lg" />
+                    <span></span>
+                </div>
+                <div class="flex-end">
+                    <input class="button2" type="submit" value="Change" />
+                </div>
+            </form>
         </div>
-        <div class="flex-end">
-            <input class="button2" type="submit" value="Change" />
-        </div>
-    </form>
+
+    </div>
 </div>
