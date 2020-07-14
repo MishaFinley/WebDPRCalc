@@ -68,6 +68,19 @@ namespace WebDPRCalc.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public IActionResult Profile(string old, string password, string passwordcon)
+        {
+            string username = HttpContext.Session.GetString("username");
+            User check = UserDatabaseInterface.readUser(username);
+            if (!(check is null) && password.Equals(passwordcon) && check.validPassword(old, username))
+            {
+                check.password = Models.User.hashPassword(password, username);
+                UserDatabaseInterface.updateUser(check);
+            }
+            ViewBag.profile = check;
+            return View();
+        }
 
     }
 }
