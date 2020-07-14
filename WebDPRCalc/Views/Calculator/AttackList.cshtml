@@ -1,16 +1,37 @@
 ﻿
 @{ ViewData["Title"] = "Attack List"; }
 
-<h1>AttackList</h1>
+<div class="cont">
 
-@{ if (!(ViewBag.attacks is null))
-    {
-@foreach (var attack in ViewBag.attacks)
-{
-<div>
-    <h2>@attack.name</h2>
-    @*<a class="hm-link" asp-controller="Calculator" asp-action="ViewAttack">View</a>*@
-    @Html.ActionLink("View", "ViewAttack", "Calculator", new { id = attack.id })
-    @Html.ActionLink("Edit", "EditAttack", "Calculator", new { id = attack.id })
-    @Html.ActionLink("Delete", "DeleteAttack", "Calculator", new { id = attack.id })
-</div>          } } }
+    <div class="title">DPRCFDND</div>
+    <div class="subtitle">@ViewData["Title"]</div>
+
+    <div class="atk-list">
+        @{if (!(ViewBag.attacks is null))
+           {
+               @foreach (var attack in ViewBag.attacks)
+               {
+                    <div class="atk">
+                        <div class="atk-name">@attack.name</div>
+
+                        <div class="atk-opts">
+                            <div class="opt">
+                                @Html.ActionLink("View", "ViewAttack", "Calculator", new { id = attack.id })
+                            </div>
+
+                            <div class="opt">
+                                @Html.ActionLink("Edit", "EditAttack", "Calculator", new { id = attack.id })
+                            </div>
+
+                            <div class="opt">
+                                @Html.ActionLink("Delete", "DeleteAttack", "Calculator", new { id = attack.id })
+                            </div>
+                        </div>
+                    </div>      
+               } 
+           } 
+         }
+    </div>
+
+</div>
+
