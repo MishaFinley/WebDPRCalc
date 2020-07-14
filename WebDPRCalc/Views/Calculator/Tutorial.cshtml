@@ -9,4 +9,173 @@
     <div class="asp-btn">
         <a asp-controller="Calculator" asp-action="EditAttack">Return To Calculator</a>
     </div>
+
+    <div class="text-cont">
+
+        <div class="subtitle">Definitions</div>
+
+        <div class="subsection">
+            <div class="def-cont">
+                <div class="term">DPR</div>
+                <div class="def">Damage Per Round</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Advantage</div>
+                <div class="def">To roll 2 dice to hit and use the higher of the 2 results</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Disadvantage</div>
+                <div class="def">To roll 2 dice to hit and use the lower of the 2 results</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Attack Modifier</div>
+                <div class="def">The numeric stat modifier that is added on to your "to hit" result after rolling your to hit die. (NOTE: When using the Dice Parser, DO NOT include the attack modifier. It will not work.)</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Critical Range</div>
+                <div class="def">Number of potentially critical results starting at the highest and counting down. (i.e. On a d20, a crit range of 1 would just be 20, but a crit range of 4 would be 17, 18, 19 and 20.)</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Lucky Die</div>
+                <div class="def">Whenever you make an attack roll, an ability check, or a saving throw, you can spend one luck point to roll an additional d20. You can choose to spend one of your luck points after you roll the die, but before the outcome is determined</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Elven Accuracy</div>
+                <div class="def">The accuracy of elves is legendary, especially that of elf archers and spellcasters. You have uncanny aim with attacks that rely on precision rather than brute force. You gain the following benefit:</div>
+                <div class="sub-def">- Increase your Dexterity, Intelligence, Wisdom, or Charisma score by 1, to a maximum of 20.</div>
+                <div class="sub-def">- Whenever you have advantage on an attack roll using Dexterity, Intelligence, Wisdom, or Charisma, you can reroll one of the dice once.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Halfling Luck</div>
+                <div class="def">See Lucky (Above). Functions the same but is a racial feature instead of a class feat.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Reroll on Miss</div>
+                <div class="def">Re-roll the "to hit" dice once if it is not high enough to hit.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">To Hit Dice/Die</div>
+                <div class="def">The dice or die that the user will use every time they attempt to make an attack.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Damage Dice/Die</div>
+                <div class="def">The dice or die that the user will use every time they successfully attack in order to calculate damage.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Damage Modifier</div>
+                <div class="def">The numeric stat modifier that is added on to your damage on a succesful hit after you have rolled and added the results of your attack die.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Resistance</div>
+                <div class="def">Resistance in this case means that the entity being attacked is resistant to the type of damage being done, this means all damage dealt will be half as powerful.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Reroll Dice/Die</div>
+                <div class="def">The number of dice or die the user wishes to have re-rolled when making an attack.</div>
+            </div>
+
+            <div class="def-cont">
+                <div class="term">Additional Crit Dice/Die</div>
+                <div class="def">Additional, non-primary damage Dice/Die that affect the over all damage, but do not recieve the attack modifier bonus with them.</div>
+            </div>
+        </div>
+        
+        <div class="subtitle">Entering Dice</div>
+
+        <div class="subsection">
+            <p>
+                For D&D, dice are one of the most important aspects of attacking,
+                in order to ensure we account for as much as possible in regards to dice/die
+                we have built a parser so that you can enter a string denoting what dice you
+                have and how you intend for them to act. Examples and explanations are
+                provided below.
+            </p>
+
+            <div class="def-cont">
+                <div class="term">d#</div>
+                <div class="def">Anywhere you see d followed by a number with out a space, it means dice with sides equal to that number. For example, a d6 is a normal 6 (six) sided dice, but a d12 is a dodecahedron.</div>
+            </div>
+
+            <div class="examp-cont">
+                <div class="def-cont">
+                    <div class="term">[#1] d [#2]</div>
+                    <div class="def">#1 is the number of dice/die. #2 is the number of sides on the dice/die.</div>
+                </div>
+
+                <div class="example">
+                    <div class="ex">Example: 2d10</div>
+                    <div class="ex-desc">This means you would like to roll 2 (two) separate 10 (ten) sided dice.</div>
+                </div>
+            </div>
+
+            <div class="examp-cont">
+                <div class="def-cont">
+                    <div class="term">+</div>
+                    <div class="def">
+                        The "+" character can be added between sets of die to allow users to have multiple different types
+                        of dice/die
+                    </div>
+
+                </div>
+
+                <div class="example">
+                    <div class="ex">Example: 2d10 + 3d4</div>
+                    <div class="ex-desc">This means you would like to roll 2 (two) d10 (ten sided dice) and then add the result of that to the result of rolling 3 (three) d4 (4 sided dice)</div>
+                </div>
+            </div>
+
+            <div class="examp-cont">
+                <div class="def-cont">
+                    <div class="term">(r#)</div>
+                    <div class="def">The r denotes to reroll the dice when it results in a number equal to or less than the number following the r.</div>
+
+                </div>
+
+                <div class="example">
+                    <div class="ex">Example: 2d10+3d4 (r2)</div>
+                    <div class="ex-desc">This means mean you would like to roll 2 d10, then roll 3 d4, re-roll anything equal too or less than 2 on the d4s once, and then add the results.</div>
+                </div>
+            </div>
+
+            <div class="examp-cont">
+                <div class="def-cont">
+                    <div class="term">(m#)</div>
+                    <div class="def">The m denotes the minimum number on the die (i.e. Treat all ones rolled as 2s)</div>
+
+                </div>
+
+                <div class="example">
+                    <div class="ex">Example: 1d100 (m3)</div>
+                    <div class="ex-desc">This means you would like to roll a single 100 sided die, however, anything beneath 3 will be treated as a 3, making the range 3-100 with a 3% chance of rolling 3.</div>
+                </div>
+            </div>
+
+            <div class="examp-cont">
+                <div class="def-cont">
+                    <div class="term">(r#,m#)</div>
+                    <div class="def">The r and m still denote the same things as above, however, this is the format in which one should express they wish to set both the reroll number and the minimum.</div>
+
+                </div>
+
+                <div class="example">
+                    <div class="ex">Example: 2d20(r2,m2)</div>
+                    <div class="ex-desc">This means you would like to roll 2 d20, both of which have a minimum number of 2, and reroll results equal too or less than 2.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

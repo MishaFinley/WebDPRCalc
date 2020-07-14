@@ -24,6 +24,23 @@
 
                 <div class="calc-part">
                     <div class="inp-cont">
+                        <div class="rb">
+                            <input type="radio" id="n" name="adv-btn" value="normal">
+                            <label for="normal">Normal</label><br>
+                        </div>
+
+                        <div class="rb">
+                            <input type="radio" id="a" name="adv-btn" value="advantage">
+                            <label for="female">Advantage</label><br>
+                        </div>
+
+                        <div class="rb">
+                            <input type="radio" id="d" name="adv-btn" value="disadvantage">
+                            <label for="other">Disadvantage</label>
+                        </div>
+                    </div>
+
+                    <div class="inp-cont">
                         <label class="inp-label">Attack Modifier:</label>
                         <input id="atk-mod" type="number" name="atkmod" class="inp-sm" value="@ViewBag.attack.attackRoll.numericalAddition" />
                         <span></span>

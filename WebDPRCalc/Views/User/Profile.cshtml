@@ -1,10 +1,18 @@
 ﻿
 @{ ViewData["Title"] = "Profile"; }
 
-<h1>Profile</h1>
-<h2>@ViewBag.profile.username</h2>
-<h3>Charge Your Password</h3>
-<div class="form-cont">
+<div class="cont">
+    <div class="title">DPRCFDND</div>
+    <div class="subtitle">@ViewData["Title"]</div>
+
+    <div class="profile">
+        <div class="info-cont">
+            <label>Username: </label>
+            <div id="user">@ViewBag.profile.username</div>
+        </div>
+      
+        <div>Change your password below</div>
+      <div class="form-cont">
     <form method="post" class="act-form">
         <div class="inp-cont-nbg">
             <!--//asp-for="Password"-->
@@ -36,4 +44,7 @@
             <input class="button2" type="submit" value="Change" />
         </div>
     </form>
+</div>
+  
+  </div>
 </div>
