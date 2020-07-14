@@ -86,6 +86,9 @@ namespace WebDPRCalc.Controllers
             atkroll.rerollMiss = fc["missreroll"] == "on" ? true : false;
             atkroll.diceAddition = Die.fromString(fc["tohit"]);
 
+            atkroll.disadvantage = fc["adv"] == "disadvantage" ? true : false;
+            atkroll.advantage = fc["adv"] == "advantage" ? true : false;
+
             DamageRoll dmgRoll = new DamageRoll();
             try
             {

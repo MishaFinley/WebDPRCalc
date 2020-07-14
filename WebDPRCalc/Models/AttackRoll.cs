@@ -3,7 +3,7 @@
     public class AttackRoll
     {
         public int numericalAddition { get; set; }
-        private bool advantage { get; set; }
+        public bool advantage { get; set; }
         public bool disadvantage { get; set; }
         public bool luckyDie { get; set; }
         public bool elvenAccuracy { get; set; }
